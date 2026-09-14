@@ -7,7 +7,7 @@ on:
     branches: [ main, master ]
 
 jobs:
-  devsecops-gate:
+  test-and-security-gate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
@@ -24,9 +24,9 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e ".[dev]" cyclonedx-bom
+          pip install -e ".[dev]" pytest-cov cyclonedx-bom
 
-      - name: 🔒 1. Secret Leak Detection (Gitleaks)
+      - name: 🔒 1. Secret Scanning (Gitleaks)
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,10 +35,17 @@ jobs:
         run: |
           bandit -r src/ -ll
 
-      - name: 🧪 3. Pytest Suite
+      - name: 🧪 3. Unit & Integration Test Suite (Coverage >= 90%)
         run: |
-          pytest -v
+          pytest -v --cov=src --cov-report=term-missing --cov-fail-under=90
 
-      - name: 📦 4. Generate CycloneDX SBOM
+      - name: 📦 4. Software Bill of Materials (CycloneDX SBOM)
         run: |
           cyclonedx-py environment -o sbom.json
+
+      - name: 📤 5. Upload SBOM Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cyclonedx-sbom
+          path: sbom.json
+          if-no-files-found: warn
