@@ -26,7 +26,7 @@ dev = [
 ]
 
 [project.scripts]
-osint-fusion = "osint_fusion.cli:app"
+osint-fusion = "osint_fusion.cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
