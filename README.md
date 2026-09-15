@@ -12,6 +12,10 @@
 
 Diseñado bajo la filosofía **Zero-Cost Sovereign Defense**: ejecución 100% local en CPU Linux, sin suscripciones a APIs privativas, con protección estricta contra SSRF (CWE-918), parseo seguro anti-XXE (`defusedxml`) y sanitización automática de PII.
 
+> 🌐 **Interactive Demo Showcase:** Este motor OSINT está integrado en la plataforma unificada **CrimAI Platform**. Puedes explorar la visualización física interactiva de grafos de entidades y detección de anillos de colusión en vivo en el [Showcase Interactivo en GitHub Pages](https://cibi-dev.github.io/crimai-platform/).
+
+[![CrimAI Platform Showcase Preview](https://raw.githubusercontent.com/cibi-dev/crimai-platform/main/docs/assets/showcase-preview.svg)](https://cibi-dev.github.io/crimai-platform/)
+
 ---
 
 ## 🏗️ Arquitectura del Sistema
