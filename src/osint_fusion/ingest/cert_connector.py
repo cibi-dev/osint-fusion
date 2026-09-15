@@ -6,7 +6,8 @@ from datetime import datetime, timezone
 from typing import Any
 import uuid
 
-import httpx
+import json
+import urllib.request
 
 from osint_fusion.ingest.base import BaseConnector, validate_target_url_ssrf
 from osint_fusion.schemas import OSINTDocument
@@ -63,10 +64,9 @@ class CertTransparencyConnector(BaseConnector):
         if not validate_target_url_ssrf(self.source_uri):
             raise ValueError(f"Acceso denegado a '{self.source_uri}' por política de seguridad anti-SSRF (CWE-918).")
 
-        with httpx.Client(timeout=self.timeout_seconds, follow_redirects=False) as client:
-            resp = client.get(self.source_uri)
-            resp.raise_for_status()
-            data = resp.json()
+        req = urllib.request.Request(self.source_uri, headers={"User-Agent": "OSINTFusion/1.0"})
+        with urllib.request.urlopen(req, timeout=self.timeout_seconds) as resp:  # nosec B310
+            data = json.loads(resp.read().decode("utf-8"))
             if isinstance(data, list):
                 return self.parse_ct_entries(data)
             return []
