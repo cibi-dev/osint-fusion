@@ -6,6 +6,7 @@
 [![Security: Bandit](https://img.shields.io/badge/Security-Bandit%20Passing-brightgreen.svg)](https://github.com/PyCQA/bandit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Zero-Cost](https://img.shields.io/badge/API%20Cost-%240.00%2Fmo-success.svg)](https://github.com/cibi-dev/osint-fusion)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Interactive%20Showcase-2563eb?style=flat-square&logo=googlechrome&logoColor=white)](https://cibi-dev.github.io/crimai-platform/)
 
 > **Motor de inteligencia de fuentes abiertas (OSINT), deduplicación probabilística MinHash/LSH, análisis topológico de grafos de amenazas (NetworkX) y detección de anillos de fraude / colusión.**
 
